@@ -4,6 +4,6 @@ export default interface WalletRepository
 {
     save(wallet: Wallet): Promise<void>;
     // find(): Promise<any | []>;
-    findAll(): Promise<any[]>;
+    findAll(idUser: string): Promise<Wallet[]>;
     delete(): Promise<void>;
 }

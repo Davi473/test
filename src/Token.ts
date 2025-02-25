@@ -13,13 +13,36 @@ export default class Token
         return token;
     }
 
-    public static auth(token: any): boolean | any
+    private static descodificarToken(token: any): any | boolean
     {
-        try {
-            const user = jwt.verify(token, Token.secretKey);
-            return user;
-        } catch (err: any) {
-            return false;
+        try
+        {
+            const tokenNew = token.replace("Bearer ", "");
+            const tokenDescodificado = jwt.verify(tokenNew, Token.secretKey);
+            return tokenDescodificado;
+        }
+        catch (error)
+        {
+            return false
+        }
+    }
+
+    public static authToken(req: Request, res: Response, next: NextFunction)
+    {
+        const authHeader = req.headers["authorization"];
+        const token = Token.descodificarToken(authHeader);
+
+        if(token)
+        {
+            (req as Request & { user: { name: string; id: string } }).user = {
+                name: token.name,
+                id: token.id,
+            };
+            next();
+        }
+        else
+        {
+         res.status(401).send({ message: "Not Auth" });
         }
     }
 }

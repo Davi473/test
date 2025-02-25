@@ -1,4 +1,4 @@
-import UserRepository from "../repository/UserRepository";
+import UserRepository from "../infrastructure/UserRepository";
 import User from "../models/User";
 import Token from "../Token";
 
@@ -25,12 +25,6 @@ export class UserService
     const token = Token.create(user.id, user.name);
     return token;
     
-  }
-
-  async getAll(): Promise<Object[]>
-  {
-    const users = await this.repository.findAll();
-    return users.map(user => user.userJson());
   }
 
   async delete(id: string, name: string, 

@@ -1,5 +1,5 @@
 import { WalletService } from "../services/WalletService";
-import { Request } from "express";
+import { Request, Response } from "express";
 
 export class WalletController 
 {
@@ -7,48 +7,25 @@ export class WalletController
     readonly service: WalletService
   ) {}
 
-  async create( 
-    
-    )
+  async create(req: Request, res: Response)
   {
+     const { name, icone, valueTarget, coin } = req.body;
+     const user = req.user;
+     console.log(req.body, req.user);
+     const walletNew = await this.service.create(user.id, name, icone, valueTarget, coin);
+     console.log(walletNew);
+     res.json({ walletNew })
   }
 
-  // @Get("/")
-  // async get(@Body() user: any)
-  // {
-  //   const { name, password } = user;
-  //   const token = await this.service.login(name, password);
-  //   return { token };
-  // }
+  async delete(req: Request, res: Response)
+  {
+    
+  }
 
-  // @Delete("/")
-  // async delete(@Body() user: {id: string, name: string, password: string})
-  // {
-  //   const { id, name, password } = user;
-  //   const token = await this.service.delete(id, name, password);
-  //   return { token };
-  // }
-
-  // @Get("/:id")
-  // @Auth()
-  // async findOne(@Params() params: { id: string }, req: Request, res: Response) {
-  //   return { message: `Usuário com ID ${params.id}` };
-  // }
-
-  // @Put("/:id")
-  // @Auth()
-  // async update(
-  //   @Params() params: { id: string },
-  //   @Body() body: { name: string; email: string },
-  //   req: Request,
-  //   res: Response
-  // ) {
-  //   return { message: `Usuário ${params.id} atualizado com sucesso`, data: body };
-  // }
-
-  // @Delete("/:id")
-  // @Auth()
-  // async delete(@Params() params: { id: string }, req: Request, res: Response) {
-  //   return { message: `Usuário ${params.id} excluído com sucesso` };
-  // }
+  async get(req: Request, res: Response) 
+  {
+    const { id } = req.user;
+    const wallet = await this.service.get(id);
+    res.json({ wallet });
+  }
 }

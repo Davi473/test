@@ -1,4 +1,4 @@
-import WalletRepository from "../repository/WalletRepository";
+import WalletRepository from "../infrastructure/WalletRepository"
 import Wallet from "../models/wallet";
 
 export class WalletService 
@@ -7,19 +7,22 @@ export class WalletService
     readonly repository: WalletRepository
   ) {}
 
-  async get(idUser: string): Promise<Object>
+  async create(idUser: string, name: string, icone: string, 
+    valueTarget: number, coin: string): Promise<string>
   {
-    return {
-        id: "sdfsdf",
-
-    }
+    const createWallet = Wallet.create(idUser, name, icone, valueTarget, coin);
+    this.repository.save(createWallet);
+    return createWallet.id;
   }
 
-  async create(idUser: string, name: string, icone: string, 
-    valueTarget: number): Promise<void>
+  async get(id: string)
   {
-    const createWallet = Wallet.create(idUser, name, icone, valueTarget);
-    this.repository.save(createWallet);
+    const wallets = await this.repository.findAll(id);
+    return wallets.reduce((walletFilter: Object[], wallet) => 
+    {
+      walletFilter.push(wallet.userJson());
+      return walletFilter;
+    }, []);
   }
 }
   

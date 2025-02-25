@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import WalletRepository from "../infrastructure/WalletRepository";
 import Wallet from '../models/wallet';
 
-export default class WalletRepositoryPostgres implements WalletRepository
+export class WalletRepositoryPostgres implements WalletRepository
 {
     constructor() {}
 
@@ -22,12 +22,17 @@ export default class WalletRepositoryPostgres implements WalletRepository
     }
 
 
-    async findAll(): Promise<any> 
+    async findAll(idUser: string): Promise<Wallet[]> 
     {
-        // const query = `SELECT * FROM user`
-        // const users: User[] = await this.connect.query(query);
-        // return users.map(user => new User(user.id, user.name, user.hash));
-        return []
+        const wallets: any[] = await this.readFile();
+        const walletsUser = wallets.reduce((walletFilter, wallet) => 
+        {
+            console.log(wallet.idUser === idUser);
+            if (wallet.idUser === idUser) walletFilter.push(new Wallet(wallet.id, wallet.idUser, wallet.name, wallet.icone, wallet.valueTarget, wallet.creationDate));
+            return walletFilter;
+        }, []);
+        console.log("wallet", walletsUser);
+        return walletsUser;
     }
 
     public async delete(): Promise<void>

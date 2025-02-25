@@ -1,7 +1,7 @@
 
 test("create user", async () => 
 {
-    const name = `${Math.random()}`
+    const name = `Davi`
     const password = "123"
     const response = await fetch("http://localhost:3000/api/users/", {
         method: "POST",
@@ -18,9 +18,9 @@ test("create user", async () =>
 
 test("login user", async () => 
 {
-    const name = "0.7576731877984033"
+    const name = "Davi"
     const password = "123"
-    const response = await fetch("http://localhost:3000/users/", {
+    const response = await fetch("http://localhost:3000/api/users/", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

@@ -7,10 +7,11 @@ export default class Wallet
     private readonly _icone: string;
     private readonly _valueTarget: number;
     private readonly _creationDate: Date;
-    private readonly _idUser: string
+    private readonly _idUser: string;
+    private readonly _coin: string;
 
     constructor(id: string, idUser: string, name: string, icone: 
-        string, valueTarget: number, creationDate: Date)
+        string, valueTarget: number, creationDate: Date, coin: string)
     {
         this._id = id;
         this._name = name;
@@ -18,14 +19,15 @@ export default class Wallet
         this._valueTarget = valueTarget;
         this._creationDate = creationDate;
         this._idUser = idUser;
+        this._coin = coin;
     }
 
     public static create(idUSer: string, name: string, icone: string, 
-        valueTarget: number): Wallet
+        valueTarget: number, coin: string): Wallet
     {
         const id: string = crypto.randomUUID();
         const creationDate = new Date();
-        return new Wallet(id, idUSer, name, icone, valueTarget, creationDate);
+        return new Wallet(id, idUSer, name, icone, valueTarget, creationDate, coin);
     }
 
     get id(): string
@@ -56,6 +58,11 @@ export default class Wallet
     get idUser(): string
     {
         return this._idUser;
+    }
+
+    get coin(): string
+    {
+        return this._coin;
     }
 
     public userJson(): Object

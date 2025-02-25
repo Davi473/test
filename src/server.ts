@@ -9,9 +9,10 @@ const PORT = 3000
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 
 app.use("/api", userRoutes);
-// app.use(walletRoutes);
+app.use("/api", walletRoutes);
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
