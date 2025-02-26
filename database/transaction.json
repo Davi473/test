@@ -1,0 +1,20 @@
+[
+  {
+    "id": "90e88f1e-f983-4295-88ea-aefefe468636",
+    "idUser": "29f6257f-1cee-44a2-9ceb-0de686726c23",
+    "idWallet": "e4254d8a-5539-4fbb-879b-a400cf0b2571",
+    "name": "NYDA",
+    "amount": 100,
+    "quantity": 1,
+    "date": "2021-10-10"
+  },
+  {
+    "id": "5319e2f8-cce8-4d5c-be22-dd9ca5c0b291",
+    "idUser": "29f6257f-1cee-44a2-9ceb-0de686726c23",
+    "idWallet": "e4254d8a-5539-4fbb-879b-a400cf0b2571",
+    "name": "VALE",
+    "amount": 100,
+    "quantity": 1,
+    "date": "2021-10-10"
+  }
+]

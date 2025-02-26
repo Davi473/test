@@ -11,9 +11,7 @@ export class WalletController
   {
      const { name, icone, valueTarget, coin } = req.body;
      const user = req.user;
-     console.log(req.body, req.user);
      const walletNew = await this.service.create(user.id, name, icone, valueTarget, coin);
-     console.log(walletNew);
      res.json({ walletNew })
   }
 
@@ -27,5 +25,14 @@ export class WalletController
     const { id } = req.user;
     const wallet = await this.service.get(id);
     res.json({ wallet });
+  }
+
+  async walletTransactions(req: Request, res: Response) 
+  {
+    const { id } = req.params;
+    const user = req.user;
+    console.log(id)
+    const transactions = await this.service.walletTransactions(id, user.id);
+    res.json({ transactions });
   }
 }

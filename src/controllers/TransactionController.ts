@@ -9,16 +9,16 @@ export class TransactionController
 
   async create(req: Request, res: Response)
   {
-    const { name, amount, quantity, date } = req.body;
+    const { idWallet, name, amount, quantity, date } = req.body;
     const user = req.user;
-    const response = await this.service.create(user.id, name, amount, quantity, date);
-    res.json({ message: "Transaction create", response })
+    const transaction = await this.service.create(user.id, idWallet, name, amount, quantity, date);
+    res.json({ message: "Transaction create", transaction })
   }
 
   async get(req: Request, res: Response)
   {
-    const { name, password } = req.body;
-    const token = await this.service.login(name, password);
-    res.json({ token })
+    const { id } = req.user;
+    const response = await this.service.getLastTen(id);
+    res.json({ response });
   }
 }

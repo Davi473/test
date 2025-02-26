@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "e4254d8a-5539-4fbb-879b-a400cf0b2571",
+    "idUser": "29f6257f-1cee-44a2-9ceb-0de686726c23",
+    "name": "Stock",
+    "icone": "dsdf",
+    "valueTarget": 20000,
+    "creationDate": "2025-02-25T13:21:16.977Z"
+  },
+  {
+    "id": "c86793e6-949b-46e7-9b9e-e4b907189237",
+    "idUser": "29f6257f-1cee-44a2-9ceb-0de686726c23",
+    "name": "Bitcoin",
+    "icone": "dsdf",
+    "valueTarget": 20000,
+    "creationDate": "2025-02-25T13:46:18.982Z"
+  }
+]

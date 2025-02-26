@@ -25,13 +25,11 @@ export class WalletRepositoryPostgres implements WalletRepository
     async findAll(idUser: string): Promise<Wallet[]> 
     {
         const wallets: any[] = await this.readFile();
-        const walletsUser = wallets.reduce((walletFilter, wallet) => 
+        const walletsUser = wallets.reduce((walletFilter: Wallet[], wallet) => 
         {
-            console.log(wallet.idUser === idUser);
-            if (wallet.idUser === idUser) walletFilter.push(new Wallet(wallet.id, wallet.idUser, wallet.name, wallet.icone, wallet.valueTarget, wallet.creationDate));
+            if (wallet.idUser === idUser) walletFilter.push(new Wallet(wallet.id, wallet.idUser, wallet.name, wallet.icone, wallet.valueTarget, wallet.creationDate, wallet.coin));
             return walletFilter;
         }, []);
-        console.log("wallet", walletsUser);
         return walletsUser;
     }
 

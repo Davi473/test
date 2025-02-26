@@ -1,10 +1,12 @@
 import WalletRepository from "../infrastructure/WalletRepository"
 import Wallet from "../models/wallet";
+import { TransactionService } from "./TransactionService";
 
 export class WalletService 
 {
   constructor(
-    readonly repository: WalletRepository
+    readonly repository: WalletRepository,
+    readonly serviceTransaction: TransactionService
   ) {}
 
   async create(idUser: string, name: string, icone: string, 
@@ -23,6 +25,12 @@ export class WalletService
       walletFilter.push(wallet.userJson());
       return walletFilter;
     }, []);
+  }
+
+  async walletTransactions(idWallet: string, idUser: string)
+  {
+    const transactions = await this.serviceTransaction.pickUpTransactionsFromWallet(idWallet, idUser);
+    return transactions;
   }
 }
   
